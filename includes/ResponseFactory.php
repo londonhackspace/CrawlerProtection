@@ -46,7 +46,8 @@ class ResponseFactory {
 		'CrawlerProtectionUse418',
 		'CrawlerProtectionRawDenial',
 		'CrawlerProtectionRawDenialHeader',
-		'CrawlerProtectionRawDenialText',
+		'CrawlerProtectionRawDenialText',		
+		'CrawlerProtectionDenialDelay',
 	];
 
 	/** @var ServiceOptions */
@@ -75,6 +76,7 @@ class ResponseFactory {
 	 * @return void
 	 */
 	public function denyAccess( $output ): void {
+		sleep( $this->options->get( 'CrawlerProtectionDenialDelay' ) );
 		if ( $this->options->get( 'CrawlerProtectionRawDenial' ) ) {
 			if ( $this->options->get( 'CrawlerProtectionUse418' ) ) {
 				$this->denyAccessWith418();

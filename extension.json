@@ -48,6 +48,9 @@
         "CrawlerProtectionRawDenialText": {
             "value": "403 Forbidden. You must be logged in to view this page."
         },
+        "CrawlerProtectionDenialDelay": {
+            "value": 0
+        },
         "CrawlerProtectionAllowedIPs": {
             "value": []
         }
