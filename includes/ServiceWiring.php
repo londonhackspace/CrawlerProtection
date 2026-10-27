@@ -25,7 +25,9 @@
 
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\CrawlerProtection\CrawlerProtectionService;
+use MediaWiki\Extension\CrawlerProtection\HookRunner;
 use MediaWiki\Extension\CrawlerProtection\ResponseFactory;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
 return [
@@ -45,7 +47,10 @@ return [
 					CrawlerProtectionService::CONSTRUCTOR_OPTIONS,
 					$services->getMainConfig()
 				),
-				$services->get( 'CrawlerProtection.ResponseFactory' )
+				$services->get( 'CrawlerProtection.ResponseFactory' ),
+				new HookRunner( $services->getHookContainer() ),
+				defined( 'MW_ENTRY_POINT' ) && MW_ENTRY_POINT === 'cli',
+				LoggerFactory::getInstance( 'CrawlerProtection' )
 			);
 		},
 ];
